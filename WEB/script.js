@@ -1,87 +1,87 @@
-document.addEventListener('load', initialize())
+/*
+    Essa primeira parte do código é a parte que cria variaveis constante que seram relativas aos componentes da tela.  
+*/
 
+const pagina = document // essa variavel referencia a pagina.
+const tela = document.getElementById('tela') // essa variavel referencia o frame.
+const bSiga = document.getElementById('siga') // essa variavel referencia o botão siga.
+const bCalendario = document.getElementById('calendario') // essa variavel referencia o botão calendario.
+const bHorario = document.getElementById('horario') // essa variavel referencia o botão horario.
 
-function setSizeFrame(){
-    let elemento = document.querySelector('#tela'); // obtem o campo do frame
-    elemento.style.cssText = 'width: 80%; height: 700px;'; // seta a altura e largura do frame
-}
+/*
+    Essa segunda parte do código é a parte que terá os eventos dos componentes.  
+*/
 
+pagina.addEventListener('load', initialize()) // evento de carregar página.
+bSiga.addEventListener('click', clickSiga) // evento de click do botão siga
+bCalendario.addEventListener('click', clickCalendario) // evento de click do botão calendario
+bHorario.addEventListener('click', clickHorario) // evento de click do botão horario
+
+/* 
+    Essa terceira parte do código é a parte que terá as funções do programa:
+*/
+
+// função executada ao inicalizar a pagina:
 function initialize(){
-    setSizeFrame()
-    onSiga()
+    ativaSiga() // chama a função que ativa o siga.
 }
 
-function onSiga(){
-    document.querySelector("#siga").style.cssText = 'color: white'
-    mostrarSiga()
+// função que ativa o siga:
+function ativaSiga(){
+    bSiga.style.cssText = 'color: white' // aqui muda a cor do texto do botão do siga.
+    // essa parte aqui é a que coloca o site do Siga no frame:
+    var newSrc = "https://siga.cps.sp.gov.br/ALUNO/login.aspx" // variavel com site do SIGA.
+    tela.src = newSrc; // aqui coloca a variavel acima como o source do frame.
 }
 
-function mostrarSiga(){
-    var newSrc = "https://siga.cps.sp.gov.br/ALUNO/login.aspx"
-    document.getElementById('tela').src = newSrc;
-
+// função que desativa o siga:
+function desativaSiga(){
+    bSiga.style.cssText = 'color: black' // aqui muda a cor do texto do botão do siga.
 }
 
-function offSiga(){
-    document.querySelector("#siga").style.cssText = 'color: black'
+// função que ativa o calendario:
+function ativaCalendario(){
+    bCalendario.style.cssText = 'color: white' // aqui muda a cor do texto do botão do calendario.
+    // essa parte aqui é a que coloca PDF do calendario no frame:
+    var newSrc = "../PDFs/calendario.pdf" // variavel com caminho do PDF do calendario.
+    tela.src = newSrc; // aqui coloca a variavel acima como o source do frame.
 }
 
-function onCalendario(){
-    document.querySelector("#calendario").style.cssText = 'color: white'
-    mostrarCalendario()
+// função que desativa o calendario:
+function desativaCalendario(){
+    bCalendario.style.cssText = 'color: black' // aqui muda a cor do texto do botão do calendario.
 }
 
-function mostrarCalendario(){
-    var newSrc = "../PDFs/calendario.pdf"
-    document.getElementById('tela').src = newSrc;
-
+// função que ativa o horario:
+function ativaHorario(){
+    bHorario.style.cssText = 'color: white' // aqui muda a cor do texto do botão do horario.
+    // essa parte aqui é a que coloca PDF do horario no frame:
+    var newSrc = "../PDFs/horario.pdf" // variavel com caminho do PDF do horario.
+    tela.src = newSrc; // aqui coloca a variavel acima como o source do frame.
 }
 
-function offCalendario(){
-    document.querySelector("#calendario").style.cssText = 'color: black'
+// função que desativa o calendario:
+function desativaHorario(){
+    bHorario.style.cssText = 'color: black' // aqui muda a cor do texto do botão do horario.
 }
 
-function onHorario(){
-    document.querySelector("#horario").style.cssText = 'color: white'
-    mostrarHorario()
-}
-
-function mostrarHorario(){
-    var newSrc = "../PDFs/horario.pdf"
-    document.getElementById('tela').src = newSrc;
-
-}
-
-function offHorario(){
-    document.querySelector("#horario").style.cssText = 'color: black'
-}
-
-const btn_Siga = document.getElementById('siga');
-
-btn_Siga.addEventListener('click', clickSiga)
-
+// função de clique do botão siga:
 function clickSiga(){
-    onSiga()
-    offCalendario()
-    offHorario()
+    ativaSiga() // chama a função que ativa o siga
+    desativaCalendario() // chama a função que desativa o calendario
+    desativaHorario() // chama a função que desativa o horario
 }
 
-const btn_Calendario = document.getElementById('calendario');
-
-btn_Calendario.addEventListener('click', clickCalendario)
-
+// função de clique do botão calendario:
 function clickCalendario(){
-    onCalendario()
-    offSiga()
-    offHorario()
+    ativaCalendario() // chama a função que ativa o calendario
+    desativaHorario() // chama a função que desativa o horario
+    desativaSiga() // chama a função que desativa o siga
 }
 
-const btn_Horario = document.getElementById('horario');
-
-btn_Horario.addEventListener('click', clickHorario)
-
+// função de clique do botão horario:
 function clickHorario(){
-    onHorario()
-    offSiga()
-    offCalendario()
+    ativaHorario() // chama a função que ativa o horario
+    desativaCalendario() // chama a função que desativa o calendario
+    desativaSiga() // chama a função que desativa o siga
 }
